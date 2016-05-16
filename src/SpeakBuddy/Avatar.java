@@ -16,16 +16,17 @@ public class Avatar extends javax.swing.JFrame {
     /**
      * Creates new form Avatar
      */
-    Storage storage=new Storage("Student");
+    Storage storage=new Storage("Student");//instancia e inicia a classe Storage
+    //para que os dados do usuario possam ser manipulados
     String lines[];
     public Avatar() {
         try{
-            storage.readUserInfo();
+            storage.readUserInfo();//lê os dados do usuario
         }
         catch(IOException ie){
             ie.printStackTrace();
         }
-        initComponents();
+        initComponents();//inicia e carrega os componentes do JFrame na tela
     }
 
     /**

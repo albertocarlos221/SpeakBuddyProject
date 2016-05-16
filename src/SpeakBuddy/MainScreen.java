@@ -26,13 +26,16 @@ public class MainScreen extends javax.swing.JFrame {
      * Creates new form MainScreen
      */
     
-    Storage storage;
+    Storage storage;//instancia a classe Storage, que contém as intruções para 
+    //salvar, ler e atualizar os dados do usuario
     
+    //variáveis de controle e contexto
     int n=0, selected;
     String name="";
     
     public MainScreen() {
-        initComponents();
+        initComponents();//O método intComponents() inicia e exibe os componentes do
+        //projeto na tela
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,7 +156,7 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Choose Your Character");
 
@@ -228,7 +231,7 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(90, 90, 90)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addComponent(CChooserNext)
                 .addGap(115, 115, 115))
         );
@@ -477,29 +480,35 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 public void showScreen(JFrame frame){
+    //O método showScreen() recee um JFrame e o exibe  na área central da tela
     frame.setVisible(true);
     frame.setLocationRelativeTo(null);
 }
 public void showLayout(String layout){
+    //Este método recebe o nome dado a um JPanel e o exibe, utilizando o CardLayout
     CardLayout cardLayout = (CardLayout) Root.getLayout();
             cardLayout.show(Root, layout);
 }
     private void myCharItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myCharItemActionPerformed
-        showScreen(new Avatar());
+        showScreen(new Avatar());//exibe o JFrame Avatar
     }//GEN-LAST:event_myCharItemActionPerformed
 
     private void contItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contItemActionPerformed
-        showScreen(new ConText());
+        showScreen(new ConText());//exibe o JFrame ConText
     }//GEN-LAST:event_contItemActionPerformed
 
     private void MSEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MSEnterActionPerformed
         try{
+            //Lê as informações do usuario atraves do metodo
+            //readUserInfo(), da classe Storage
             storage=new Storage("Student");
             storage.readUserInfo();
             name=storage.linhas[0];
             
-            showLayout("IntroducingScreen");
-            new atualiza().start();
+            showLayout("IntroducingScreen");//exibe o JPanel de apresentação do
+            //personagem escolhido
+            new atualiza().start();//inicia a thread que atualiza o texto exibido
+            //na tela
         }
         catch(IOException ie){
         showLayout("CharChooser");
@@ -513,7 +522,9 @@ public void showLayout(String layout){
            JOptionPane.showMessageDialog(null, "You must choose one of the characters!");
        }
        else{
-                if(selected== 1){
+            //verifica o valor da variavel 'selected' e atribui o nome do personagem
+            //escolhido à variável 'name'
+                if(selected==1){
                     name="Amy";
                 }
        
@@ -527,6 +538,7 @@ public void showLayout(String layout){
                     infor[2]=1+"";
                     infor[3]=false+"";
                     storage.writeUserInfo(infor);
+                    //escreve o nome do personagem escolhido no arquivo do usuario
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
